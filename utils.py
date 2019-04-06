@@ -41,7 +41,7 @@ while(True):
     #blurred = cv2.GaussianBlur(gray, (5, 5), 0)
     #thresh = cv2.threshold(blurred, 60, 255, cv2.THRESH_BINARY)[1]
     blurred = cv2.GaussianBlur(gray, (5, 5), 0)
-    thresh = cv2.threshold(blurred, 60, 255, cv2.THRESH_BINARY)[1]
+    thresh = cv2.threshold(blurred, 60, 126, cv2.THRESH_BINARY)[1]
     #find contours in threshhold image
     cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     cnts = imutils.grab_contours(cnts)
@@ -50,14 +50,17 @@ while(True):
     for c in cnts:
         #compute center of the contour, then detect
         #the name of the shape using only the contour
+        peri = cv2.arcLength(c, True)
+        print(peri)
+        if peri > 1000: continue
         M = cv2.moments(c)
         cX = int((M["m10"] / (M["m00"]+1e-7)) * ratio)
         cY = int((M["m01"] / (M["m00"]+1e-7)) * ratio)
+        print((cX, cY))
         shape = sd.detect(c)
-
+        if shape == 'circle': continue
         #multiply the contour (x,y) coordinates by the resize
         #ratio then draw the contours and name the shape
-
         c = c.astype("float")
         c *= ratio
         c = c.astype("int")
