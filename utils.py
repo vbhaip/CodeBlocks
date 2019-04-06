@@ -26,8 +26,12 @@ class ShapeDetector:
 cap = cv2.VideoCapture(0)
 
 while(True):
-
     ret, frame = cap.read()
+    '''ap = argparse.ArgumentParser()
+    ap.add_argument("-i", "--image", required=True,
+                    help="path to the input image")
+    args = vars(ap.parse_args())
+    frame = cv2.imread(args["image"])'''
     #load the image and resize it so that the shapes
     #can be approximated better
     resized = imutils.resize(frame, width=300)
@@ -36,7 +40,7 @@ while(True):
     gray = cv2.cvtColor(resized, cv2.COLOR_BGR2GRAY)
     #blurred = cv2.GaussianBlur(gray, (5, 5), 0)
     #thresh = cv2.threshold(blurred, 60, 255, cv2.THRESH_BINARY)[1]
-    blurred = cv2.GaussianBlur(gray, (1, 1), 0)
+    blurred = cv2.GaussianBlur(gray, (5, 5), 0)
     thresh = cv2.threshold(blurred, 60, 255, cv2.THRESH_BINARY)[1]
     #find contours in threshhold image
     cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -47,8 +51,8 @@ while(True):
         #compute center of the contour, then detect
         #the name of the shape using only the contour
         M = cv2.moments(c)
-        cX = int((M["m10"] / M["m00"]) * ratio)
-        cY = int((M["m01"] / M["m00"]) * ratio)
+        cX = int((M["m10"] / (M["m00"]+1e-7)) * ratio)
+        cY = int((M["m01"] / (M["m00"]+1e-7)) * ratio)
         shape = sd.detect(c)
 
         #multiply the contour (x,y) coordinates by the resize
@@ -61,8 +65,9 @@ while(True):
         cv2.putText(frame, shape, (cX, cY), cv2.FONT_HERSHEY_SIMPLEX,
                     0.5, (255, 255, 255), 2)
         #output image
-        cv2.imshow('frame', frame)
+        #cv2.imshow('frame', frame)
         cv2.waitKey(0)
+    cv2.imshow('frame', frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
