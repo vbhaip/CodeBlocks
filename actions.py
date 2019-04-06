@@ -5,7 +5,10 @@ L="Linux"
 W="Windows"
 M="Darwin"
 def open_google():
-    call(["open","[location of google]"])
+    if p==L:
+        call(["google-chrome"])
+    elif p==M:
+        call(["open","[location of google]"])
 def open_word():
     if p==M:
         call(["open","[location of Word]"])
