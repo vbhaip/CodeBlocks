@@ -1,3 +1,4 @@
+from elasticsearch import Elasticsearch
 import platform
 from subprocess import call
 p=platform.system()
