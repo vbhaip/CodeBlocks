@@ -5,13 +5,10 @@ from color_num_to_block import dic as color_num_to_block
 SEARCH_CONE_SLOPE = .15
 INDENT_DIST = 10
 
-#inp = [(50, 50, 'ORANGE', 4), (100, 50, 'YELLOW', 4), (80, 100, 'ORANGE', 4), (130, 100, 'YELLOW', 4), (110, 150, 'GREEN', 4), (110, 200, 'GREEN', 5), (80, 250, 'GREEN', 6), (50, 300, 'GREEN', 4)]
-<<<<<<< HEAD
-inp = [(50, 50, 'ORANGE', 4), (100, 50, 'YELLOW', 4), (80, 100, 'GREEN', 4), (80, 150, 'GREEN', 5)]
-=======
-#inp = [(50, 20, 'GREEN', 5), (50, 50, 'ORANGE', 4), (100, 50, 'YELLOW', 4), (80, 100, 'GREEN', 4), (80, 150, 'GREEN', 5), (50, 200, 'ORANGE', 5), (80, 250, 'GREEN', 6), (50, 300, 'GREEN', 4)]
-inp = [(50, 50, 'ORANGE', 4), (100, 50, 'YELLOW', 4), (80, 100, 'ORANGE', 4), (130, 100, 'YELLOW', 4), (110, 150, 'GREEN', 4)]
->>>>>>> d90488290e173019ff2003f12a7d99f54b0e1d39
+#inp = [(50, 50, 'PINK', 4), (100, 50, 'YELLOW', 4), (80, 100, 'PINK', 4), (130, 100, 'YELLOW', 4), (110, 150, 'GREEN', 4), (110, 200, 'GREEN', 5), (80, 250, 'GREEN', 6), (50, 300, 'GREEN', 4)]
+
+#inp = [(50, 20, 'GREEN', 5), (50, 50, 'PINK', 4), (100, 50, 'YELLOW', 4), (80, 100, 'GREEN', 4), (80, 150, 'GREEN', 5), (50, 200, 'PINK', 5), (80, 250, 'GREEN', 6), (50, 300, 'GREEN', 4)]
+inp = [(50, 50, 'PINK', 4), (100, 50, 'YELLOW', 4), (80, 100, 'PINK', 4), (130, 100, 'YELLOW', 4), (110, 150, 'GREEN', 4)]
 
 def add_block_group(rem, last_added, last_elif, last_elif_xy):
 	cur_block = []
@@ -25,9 +22,9 @@ def add_block_group(rem, last_added, last_elif, last_elif_xy):
 			y_score = SEARCH_CONE_SLOPE * dx + y
 			if y_score < highest_y:
 				next_block_ind, highest_y = i, y_score
-		print('next block', rem[next_block_ind], 'last elif', last_elif)
+		# print('next block', rem[next_block_ind], 'last elif', last_elif)
 		if next_block_ind == -1 or rem[next_block_ind][0] - last_elif_xy[0] < INDENT_DIST:
-			print('ending indent')
+			# print('ending indent')
 			# if no next block or indent ends
 			return cur_block
 
@@ -36,10 +33,10 @@ def add_block_group(rem, last_added, last_elif, last_elif_xy):
 			print('Condition is by itself')
 
 		# elif blocks
-		if next_block[2] == 'ORANGE':
+		if next_block[2] == 'PINK':
 			# if its an if, find the condition
 			if next_block[3] == 4:
-				print('if')
+				# print('if')
 				n_last_elif, n_last_elif_xy = next_block, (next_block[0], next_block[1])
 				closest_in_cone_ind, closest_in_cone_x = -1, 999999999
 				for i, (x, y, c, np) in enumerate(rem):
@@ -68,8 +65,8 @@ def add_block_group(rem, last_added, last_elif, last_elif_xy):
 	return cur_block
 
 blocks = add_block_group(inp, None, None, (-INDENT_DIST, 0))
-print('out', blocks)
-print('\n\n\n')
+# print('out', blocks)
+# print('\n\n\n')
 '''
 def blocks_to_struct(blocks):
 	ind = 0
@@ -83,12 +80,12 @@ def blocks_to_struct(blocks):
 			block = blocks[ind]
 			all_if_blocks.append(color_num_to_block[(block[2], block[3])])
 			ind += 1
-		# ORANGE
+		# PINK
 		else:
 			block_group = blocks[ind]
 			# if
-			print('ORANGE',block_group)
-			if block_group[0][2] == 'ORANGE' and block_group[0][3] == 4:
+			print('PINK',block_group)
+			if block_group[0][2] == 'PINK' and block_group[0][3] == 4:
 				cond = block_group[1]
 				print('2:',block_group[2:])
 				if_block = blocks_to_struct(block_group[2:])
@@ -105,7 +102,7 @@ def blocks_to_struct(blocks):
 					else:
 						block_group = blocks[ind]
 						print('bg', block_group)
-						if block_group[0][2] == 'ORANGE' and block_group[0][3] == 5:
+						if block_group[0][2] == 'PINK' and block_group[0][3] == 5:
 							else_block = blocks_to_struct(block_group[1:])
 				all_if_blocks.append(if_block)
 				all_else_blocks.append(else_block)
@@ -116,19 +113,19 @@ def blocks_to_struct(blocks):
 def blocks_to_struct(blocks):
 	ind = 0
 	all_if_blocks, all_else_blocks = [], []
-	print('inp', blocks)
+	# print('inp', blocks)
 	while ind < len(blocks):
-		print('processing', blocks[ind])
+		# print('processing', blocks[ind])
 		# GREEN
 		if type(blocks[ind]) == type((0,0)):
 			block = blocks[ind]
 			all_if_blocks.append(color_num_to_block[(block[2], block[3])])
 			ind += 1
-		# ORANGE
+		# PINK
 		else:
 			block_group = blocks[ind]
 			# if
-			if block_group[0][2] == 'ORANGE' and block_group[0][3] == 4:
+			if block_group[0][2] == 'PINK' and block_group[0][3] == 4:
 				cond = color_num_to_block[(block_group[1][2], block_group[1][3])]
 				ind += 1
 				rest = block_group[2]
@@ -137,7 +134,7 @@ def blocks_to_struct(blocks):
 				# else
 				if ind < len(blocks):
 					block_group = blocks[ind]
-					if block_group[0][2] == 'ORANGE' and block_group[0][3] == 5:
+					if block_group[0][2] == 'PINK' and block_group[0][3] == 5:
 						ind += 1
 						rest = block_group[1]
 						e_blocks, _ = blocks_to_struct(rest)
@@ -160,12 +157,12 @@ def blocks_to_struct(blocks):
 					else:
 						block_group = blocks[ind]
 						print('bg', block_group)
-						if block_group[0][2] == 'ORANGE' and block_group[0][3] == 5:
+						if block_group[0][2] == 'PINK' and block_group[0][3] == 5:
 							else_block = blocks_to_struct(block_group[1:])
 				all_if_blocks.append(if_block)
 				all_else_blocks.append(else_block)
 				'''
-	print('ret', all_if_blocks, all_else_blocks)
+	# print('ret', all_if_blocks, all_else_blocks)
 	return all_if_blocks, all_else_blocks
 
 # i_blocks, e_blocks = blocks_to_struct(blocks)

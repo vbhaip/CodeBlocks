@@ -1,6 +1,7 @@
 # from elasticsearch import Elasticsearch
 import platform
 from subprocess import call
+import datetime
 # from elasticsearch import Elasticsearch
 p=platform.system()
 L="Linux"
@@ -31,6 +32,9 @@ def computer_mute(bool):
             call(["amixer", "-D", "pulse", "sset", "Master", "unmute"])
     elif p==M:
         call(["osascript","-e","\"set volume output muted "+bool.upper()])
+
+def print_time():
+	print(datetime.datetime.now())
 # def get_tweets(hashtag):
 #     result = es.search(index="hacktjfinal", body={"query": {"match": {"message" : hashtag}}})
 #     for tweet in result['hits']['hits']:
