@@ -1,9 +1,10 @@
 import numpy as np
 import cv2
 import format_obj
+import time
 
 AREA_THRESHOLD = 15000
-COLORS = ["PINK", "GREEN", "YELLOW"]
+COLORS = ["PINK", "GREEN", "YELLOW", "RED"]
 
 #this defines the threshold for the hsv_mask
 
@@ -19,6 +20,9 @@ high_yellow_hsv = np.array([84, 219, 255])
 low_orange_hsv = np.array([0, 209, 60])
 high_orange_hsv = np.array([132, 255, 255])
 
+low_red_hsv = np.array([0, 200, 0])
+high_red_hsv = np.array([16, 255, 255])
+
 
 
 def getContours(raw_frame, color):
@@ -32,6 +36,8 @@ def getContours(raw_frame, color):
 		mask_hsv = cv2.inRange(hsv, low_yellow_hsv, high_yellow_hsv)
 	elif(color == "ORANGE"):
 		mask_hsv = cv2.inRange(hsv, low_orange_hsv, high_orange_hsv)
+	elif(color == "RED"):
+		mask_hsv = cv2.inRange(hsv, low_red_hsv, high_red_hsv)
 
 	contours, _ = cv2.findContours(mask_hsv,cv2.RETR_TREE,cv2.CHAIN_APPROX_NONE)
 
@@ -63,8 +69,10 @@ def getFeatures(frame, c, color):
 	# print("points ", len(approx))
 
 	# print("\n")
-
-	cv2.drawContours(frame, c, -1, (255, 0, 0), 3)
+	if color == "RED":
+		cv2.drawContours(frame, c, -1, (255, 255, 0), 3)
+	else:
+		cv2.drawContours(frame, c, -1, (255, 0, 0), 3)
 
 	return (x, y, color, points)
 
@@ -81,17 +89,53 @@ def getBoxArray(frame):
 	return box_arr
 
 
+def redInArr(array):
+	for x in array:
+		if x[2] == "RED":
+			return True
+
+	return False
+
+
+def removeRed(array):
+	return [i for i in array if i[2] != "RED"]
+
 cap = cv2.VideoCapture(0)
 
-
+time.sleep(3)
 
 while(True):
 
+	arr = []
+
+	while(not redInArr(arr)):
+		ret, frame = cap.read()
+		frame = cv2.flip(frame, -1)
+		# blur = cv2.GaussianBlur(frame, (25, 25), 0)
+		
+		arr = getBoxArray(frame)
+		cv2.imshow('frame', frame)
+		if cv2.waitKey(5) & 0xFF == ord('q'):
+			break
+
+	print("NO RED");
+	while(redInArr(arr)):
+		ret, frame = cap.read()
+		frame = cv2.flip(frame, -1)
+		# blur = cv2.GaussianBlur(frame, (25, 25), 0)
+		
+		arr = getBoxArray(frame)
+		cv2.imshow('frame', frame)
+		if cv2.waitKey(5) & 0xFF == ord('q'):
+			break
+	print("YES RED")
 	ret, frame = cap.read()
 	frame = cv2.flip(frame, -1)
 	# blur = cv2.GaussianBlur(frame, (25, 25), 0)
 	
-	arr = getBoxArray(frame)
+	arr = removeRed(getBoxArray(frame))
+
+	cv2.imshow('frame', frame)
 
 	# print(arr)
 	# print("\n\n")
@@ -103,7 +147,6 @@ while(True):
 
 
 	# cv2.imshow('mask',mask_hsv)
-	cv2.imshow('frame', frame)
 
 
 	if cv2.waitKey(500) & 0xFF == ord('q'):
