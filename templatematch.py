@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 
 
-AREA_THRESHOLD = 2000
+AREA_THRESHOLD = 15000
 COLORS = ["PINK", "GREEN", "YELLOW", "ORANGE"]
 
 #this defines the threshold for the hsv_mask
@@ -38,8 +38,6 @@ def getContours(raw_frame, color):
 	return contours
 
 def getFeatures(frame, c, color):
-	
-	cv2.drawContours(frame, c, -1, (255, 0, 0), 3)
 
 
 	M = cv2.moments(c)
@@ -66,6 +64,8 @@ def getFeatures(frame, c, color):
 
 	# print("\n")
 
+	cv2.drawContours(frame, c, -1, (255, 0, 0), 3)
+
 	return (x, y, color, points)
 
 
@@ -81,7 +81,7 @@ def getBoxArray(frame):
 	return box_arr
 
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 
 
 
