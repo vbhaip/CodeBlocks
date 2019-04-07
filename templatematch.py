@@ -37,8 +37,48 @@ def getContours(raw_frame, color):
 
 	return contours
 
+def getFeatures(frame, c):
+	
+	cv2.drawContours(frame, c, -1, (255, 0, 0), 3)
 
 
+	M = cv2.moments(c)
+
+	#this gives details for the smallest bounding box needed, NOTE: DOESN'T ACCOUNT FOR ROTATION
+	x, y, w, h = cv2.boundingRect(c)
+
+	#gets the angle of rotation of the bounding box, if its too large, then we should give error
+	(_,_),(_,_),angle = cv2.fitEllipse(c)
+
+	#gets perimeter, use this to find out length of contour
+	perimeter = cv2.arcLength(c,True)
+
+	#gets number of points that are needed for for the contour
+	points = len(c)
+
+	epsilon = 0.01*cv2.arcLength(c,True)
+	approx = cv2.approxPolyDP(c,epsilon,True)
+
+
+
+	# print("x,y ",x,",",y)
+	# print("angle ", angle)
+	# print("perimeter ", perimeter)
+	# print("points ", len(approx))
+
+	# print("\n")
+
+	return 
+
+
+def getBoxArray(frame):
+
+	box_arr = []
+	for color in COLORS:
+		contours = getContours(frame, color)
+		for c in contours:
+			if cv2.contourArea(c) > AREA_THRESHOLD:
+				box_arr += getFeatures(frame, contours)
 
 
 cap = cv2.VideoCapture(1)
@@ -51,55 +91,12 @@ while(True):
 	frame = cv2.flip(frame, -1)
 	# blur = cv2.GaussianBlur(frame, (25, 25), 0)
 
-	contours = getContours(frame, "GREEN")
-
-	for c in contours:
-		if cv2.contourArea(c) > AREA_THRESHOLD:
-
-			#(original image, list of contours, which contour (-1 means all of them), rgb vals, thickness)
-			cv2.drawContours(frame, c, -1, (255, 0, 0), 3)
-
-
-			M = cv2.moments(c)
-
-			#this gives details for the smallest bounding box needed, NOTE: DOESN'T ACCOUNT FOR ROTATION
-			x, y, w, h = cv2.boundingRect(c)
-
-			#gets the angle of rotation of the bounding box, if its too large, then we should give error
-			(_,_),(_,_),angle = cv2.fitEllipse(c)
-
-			#gets perimeter, use this to find out length of contour
-			perimeter = cv2.arcLength(c,True)
-
-			#gets number of points that are needed for for the contour
-			points = len(c)
-
-			epsilon = 0.01*cv2.arcLength(c,True)
-			approx = cv2.approxPolyDP(c,epsilon,True)
-
-
-
-			print("x,y ",x,",",y)
-			print("angle ", angle)
-			print("perimeter ", perimeter)
-			print("points ", len(approx))
-
-			print("\n")
-
-
-
-
-
-
-
-
-
+	
 
 
 	# cv2.imshow('mask',mask_hsv)
 	cv2.imshow('frame', frame)
-	# while(True):
-	# 	x = 1
+
 
 	if cv2.waitKey(500) & 0xFF == ord('q'):
 		break
