@@ -1,6 +1,7 @@
 from elasticsearch import Elasticsearch
 import platform
 from subprocess import call
+from elasticsearch import Elasticsearch
 p=platform.system()
 L="Linux"
 W="Windows"
@@ -29,6 +30,8 @@ def computer_mute(bool):
             call(["amixer", "-D", "pulse", "sset", "Master", "unmute"])
     elif p==M:
         call(["osascript","-e","\"set volume output muted "+bool.upper()])
+def get_tweets(hashtag):
+    
 if __name__=="__main__":
 
 
