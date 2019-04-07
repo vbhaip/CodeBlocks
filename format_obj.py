@@ -113,10 +113,9 @@ def blocks_to_struct(blocks):
 	all_if_blocks, all_else_blocks = [], []
 	print('inp', blocks)
 	while ind < len(blocks):
-		print(blocks[ind])
+		print('processing', blocks[ind])
 		# GREEN
 		if type(blocks[ind]) == type((0,0)):
-			print('GREEN')
 			block = blocks[ind]
 			all_if_blocks.append(color_num_to_block[(block[2], block[3])])
 			ind += 1
@@ -124,7 +123,6 @@ def blocks_to_struct(blocks):
 		else:
 			block_group = blocks[ind]
 			# if
-			print('ORANGE',block_group)
 			if block_group[0][2] == 'ORANGE' and block_group[0][3] == 4:
 				cond = color_num_to_block[(block_group[1][2], block_group[1][3])]
 				ind += 2
@@ -153,7 +151,7 @@ def blocks_to_struct(blocks):
 				all_if_blocks.append(if_block)
 				all_else_blocks.append(else_block)
 				'''
-	print(all_if_blocks, all_else_blocks)
+	print('ret', all_if_blocks, all_else_blocks)
 	return all_if_blocks, all_else_blocks
 
 # i_blocks, e_blocks = blocks_to_struct(blocks)
@@ -163,5 +161,6 @@ def blocks_to_struct(blocks):
 
 def format_objects(inp):
 	blocks = add_block_group(inp, None, None, (-INDENT_DIST, 0))
-	overall_struct = blocks_to_struct(blocks)
+	i_blocks, e_blocks = blocks_to_struct(blocks)
+	overall_struct = ConditionStructure(True, i_blocks, e_blocks)
 	return overall_struct
