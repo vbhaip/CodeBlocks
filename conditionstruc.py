@@ -7,8 +7,16 @@ class ConditionStructure:
 		self.else_block = else_block
 		self.cond = cond
 
-	def isCondTrue():
-		print("do if true")
+	def isTrue(self):
+		
+
+	def evaluate(self):
+		if(self.isTrue(self.cond)):
+			self.if_block.evaluate()
+		else:
+			self.else_block.evaluate()
+
+
 
 # block1 = ConditionBlock("IF", "something", "action")
 # block2 = ConditionBlock("ELSE", None, "action2")

@@ -4,7 +4,7 @@ class ConditionBlock:
 		self.cond_type = cond_type
 		self.action = action
 
-	def runAction(self):
+	def evaluate(self):
 		exec(self.action)
 
 

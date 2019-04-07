@@ -37,7 +37,7 @@ def getContours(raw_frame, color):
 
 	return contours
 
-def getFeatures(frame, c):
+def getFeatures(frame, c, color):
 	
 	cv2.drawContours(frame, c, -1, (255, 0, 0), 3)
 
@@ -53,13 +53,11 @@ def getFeatures(frame, c):
 	#gets perimeter, use this to find out length of contour
 	perimeter = cv2.arcLength(c,True)
 
-	#gets number of points that are needed for for the contour
-	points = len(c)
-
 	epsilon = 0.01*cv2.arcLength(c,True)
 	approx = cv2.approxPolyDP(c,epsilon,True)
 
-
+	#gets number of points that are needed for for the contour
+	points = len(approx)
 
 	# print("x,y ",x,",",y)
 	# print("angle ", angle)
@@ -68,7 +66,7 @@ def getFeatures(frame, c):
 
 	# print("\n")
 
-	return 
+	return (x, y, color, points)
 
 
 def getBoxArray(frame):
@@ -78,7 +76,9 @@ def getBoxArray(frame):
 		contours = getContours(frame, color)
 		for c in contours:
 			if cv2.contourArea(c) > AREA_THRESHOLD:
-				box_arr += getFeatures(frame, contours)
+				box_arr.append(getFeatures(frame, c, color))
+
+	return box_arr
 
 
 cap = cv2.VideoCapture(1)
@@ -90,14 +90,15 @@ while(True):
 	ret, frame = cap.read()
 	frame = cv2.flip(frame, -1)
 	# blur = cv2.GaussianBlur(frame, (25, 25), 0)
-
 	
+	arr = getBoxArray(frame)
 
+	print(arr)
 
 	# cv2.imshow('mask',mask_hsv)
 	cv2.imshow('frame', frame)
 
 
-	if cv2.waitKey(500) & 0xFF == ord('q'):
+	if cv2.waitKey(5000) & 0xFF == ord('q'):
 		break
 
