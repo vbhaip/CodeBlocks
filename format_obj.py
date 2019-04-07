@@ -5,7 +5,9 @@ from color_num_to_block import dic as color_num_to_block
 SEARCH_CONE_SLOPE = .15
 INDENT_DIST = 10
 
-inp = [(50, 50, 'pink', 4), (100, 50, 'yellow', 4), (80, 100, 'pink', 4), (130, 100, 'yellow', 4), (110, 150, 'green', 4), (110, 200, 'green', 5), (80, 250, 'green', 6), (50, 300, 'green', 4)]
+#inp = [(50, 50, 'pink', 4), (100, 50, 'yellow', 4), (80, 100, 'pink', 4), (130, 100, 'yellow', 4), (110, 150, 'green', 4), (110, 200, 'green', 5), (80, 250, 'green', 6), (50, 300, 'green', 4)]
+#inp = [(50, 50, 'pink', 4), (100, 50, 'yellow', 4), (80, 100, 'green', 4)]
+inp = [(50, 50, 'green', 4)]
 
 def add_block_group(rem, last_added, last_elif, last_elif_xy):
 	cur_block = []
@@ -65,7 +67,7 @@ blocks = add_block_group(inp, None, None, (-INDENT_DIST, 0))
 print('out', blocks)
 print('\n\n\n')
 
-def block_to_structzzzz(blocks):
+def block_to_struct(blocks):
 	ind = 0
 	all_if_blocks, all_else_blocks = [], []
 	while ind < len(blocks):
@@ -150,6 +152,6 @@ def blocks_to_struct(blocks):
 	print(all_if_blocks, all_else_blocks)
 	return ConditionStructure(True, all_if_blocks, all_else_blocks)
 
-overall_struct = blocks_to_struct(blocks)
+overall_struct = block_to_struct(blocks)
 print()
 print(overall_struct)
