@@ -1,15 +1,16 @@
 from conditionblock import ConditionBlock
 import actions
 import datetime
+import conditions
 
 dic = {}
 dic[('PINK', 4)] = ConditionBlock('if', '')
 dic[('PINK', 5)] = ConditionBlock('else', '')
 dic[('PINK', 6)] = ConditionBlock('for', '')
 
-dic[('YELLOW', 4)] = datetime.datetime.now().minute % 2 == 0
-dic[('YELLOW', 5)] = 8 < 9
-dic[('YELLOW', 5)] = 8 > 9
+dic[('YELLOW', 4)] = conditions.check_time
+dic[('YELLOW', 5)] = conditions.ret_true
+dic[('YELLOW', 6)] = conditions.ret_false
 
 dic[('GREEN', 4)]  = ConditionBlock('action', actions.open_google)
 dic[('GREEN', 5)]  = ConditionBlock('action', actions.open_spotify)

@@ -1,14 +1,15 @@
 from conditionstruc import ConditionStructure, ConditionStructureLoop
 from conditionblock import ConditionBlock
 from color_num_to_block import dic as color_num_to_block
+import conditions
 
-SEARCH_CONE_SLOPE = .15
-INDENT_DIST = 10
+SEARCH_CONE_SLOPE = .3
+INDENT_DIST = 30
 
 #inp = [(50, 50, 'PINK', 4), (100, 50, 'YELLOW', 4), (80, 100, 'PINK', 4), (130, 100, 'YELLOW', 4), (110, 150, 'GREEN', 4), (110, 200, 'GREEN', 5), (80, 250, 'GREEN', 6), (50, 300, 'GREEN', 4)]
 #inp = [(50, 20, 'GREEN', 5), (50, 50, 'PINK', 4), (100, 50, 'YELLOW', 4), (80, 100, 'GREEN', 4), (80, 150, 'GREEN', 5), (50, 200, 'PINK', 5), (80, 250, 'GREEN', 6), (50, 300, 'GREEN', 4)]
 #inp = [(50, 50, 'PINK', 4), (100, 50, 'YELLOW', 4), (80, 100, 'PINK', 4), (130, 100, 'YELLOW', 4), (110, 150, 'GREEN', 4), (80, 200, 'GREEN', 4)]
-inp = [(50, 50, 'PINK', 6), (80, 50, 'YELLOW', 4), (80, 100, 'GREEN', 4)]
+# inp = [(50, 50, 'PINK', 6), (80, 50, 'YELLOW', 4), (80, 100, 'GREEN', 4)]
 
 def add_block_group(rem, last_added, last_elif, last_elif_xy):
 	cur_block = []
@@ -106,16 +107,16 @@ def blocks_to_struct(blocks):
 
 	return all_if_blocks
 
-blocks = add_block_group(inp, None, None, (-INDENT_DIST, 0))
-print('out', blocks)
-print('\n\n\n')
-i_blocks = blocks_to_struct(blocks)
-overall_struct = ConditionStructure(True, i_blocks, [])
-print()
-print(overall_struct)
+# blocks = add_block_group(inp, None, None, (-INDENT_DIST, 0))
+# print('out', blocks)
+# print('\n\n\n')
+# i_blocks = blocks_to_struct(blocks)
+# overall_struct = ConditionStructure(True, i_blocks, [])
+# print()
+# print(overall_struct)
 
 def format_objects(inp):
 	blocks = add_block_group(inp, None, None, (-INDENT_DIST, 0))
 	i_blocks = blocks_to_struct(blocks)
-	overall_struct = ConditionStructure(True, i_blocks)
+	overall_struct = ConditionStructure(conditions.ret_true, i_blocks, [])
 	return overall_struct
