@@ -42,6 +42,8 @@ def computer_mute(bool):
             call(["amixer", "-D", "pulse", "sset", "Master", "unmute"])
     elif p==M:
         call(["osascript","-e","\"set volume output muted "+bool.upper()])
+def wait_five_sec():
+    time.sleep(5)
 
 def print_time():
 	print(datetime.datetime.now())

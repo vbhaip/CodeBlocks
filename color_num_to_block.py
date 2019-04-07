@@ -8,10 +8,12 @@ dic[('PINK', 4)] = ConditionBlock('if', '')
 dic[('PINK', 5)] = ConditionBlock('else', '')
 dic[('PINK', 6)] = ConditionBlock('for', '')
 
+dic[('YELLOW', 3)] = conditions.check_face
 dic[('YELLOW', 4)] = conditions.check_time
 dic[('YELLOW', 5)] = conditions.ret_true
 dic[('YELLOW', 6)] = conditions.ret_false
 
+dic[('GREEN', 3)]  = ConditionBlock('action', actions.wait_five_sec)
 dic[('GREEN', 4)]  = ConditionBlock('action', actions.open_google)
 dic[('GREEN', 5)]  = ConditionBlock('action', actions.open_spotify)
 dic[('GREEN', 6)]  = ConditionBlock('action', actions.print_time)
