@@ -4,6 +4,7 @@ import actions
 dic = {}
 dic[('PINK', 4)] = ConditionBlock('if', '')
 dic[('PINK', 5)] = ConditionBlock('else', '')
+dic[('PINK', 6)] = ConditionBlock('for', '')
 
 dic[('YELLOW', 4)] = True
 dic[('YELLOW', 5)] = False
