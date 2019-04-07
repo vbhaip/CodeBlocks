@@ -44,7 +44,7 @@ class ConditionStructureLoop:
 
 	def evaluate(self):
 		for i in range(self.loops):
-			for block in self.if_block:
+			for block in self.loop_block:
 				block.evaluate()
 
 	def display(self, indents):
