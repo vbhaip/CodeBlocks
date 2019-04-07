@@ -81,7 +81,7 @@ def getBoxArray(frame):
 	return box_arr
 
 
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 
 
 

@@ -3,7 +3,7 @@ import platform
 from subprocess import call
 import datetime
 import urllib
-# from elasticsearch import Elasticsearch
+from elasticsearch import Elasticsearch
 p=platform.system()
 L="Linux"
 W="Windows"

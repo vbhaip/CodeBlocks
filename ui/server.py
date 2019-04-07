@@ -1,5 +1,5 @@
 from flask import Flask, render_template, send_file,request, g
-import actions
+# import actions
 
 
 cache={"text":""}
@@ -17,7 +17,7 @@ def css():
     return send_file('style.css',mimetype='text/css')
 @app.route('/reset')
 def reset():
-    console_output=""
+    cache["text"]=""
     return "Console cleared!"
 @app.route('/consoletext')
 def console_text():
