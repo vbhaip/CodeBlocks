@@ -38,7 +38,7 @@ def get_tweets(hashtag):
         print(tweet['_source']['message'])
         print()
 if __name__=="__main__":
-    get_tweets("stock market")
+    get_tweets("Brunei")
 #curl -X PUT localhost:9200/test3/_settings -d {\"index\" : {\"mapping\" : {\"total_fields\" : {\"limit\" : \"5000\"}}}}
     #print(platform.system())
     #"Linux","Windows","Darwin"
