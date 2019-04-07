@@ -162,4 +162,4 @@ print(overall_struct)
 def format_objects(inp):
 	blocks = add_block_group(inp, None, None, (-INDENT_DIST, 0))
 	overall_struct = blocks_to_struct(blocks)
-	
+	return overall_struct
