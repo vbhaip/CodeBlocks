@@ -1,12 +1,17 @@
-from flask import Flask, render_template, send_file
+from flask import Flask, render_template, send_file,request, g
+import actions
+
+
+cache={"text":""}
 app = Flask(__name__)
-console_output=""
+
 @app.route('/')
 def index():
+    g.console = ""
     return render_template('index.html')
 @app.route('/logo.png')
 def logo():
-    return send_file('logo_crop.png',mimetype='image/png')
+    return send_file('logo.png',mimetype='image/png')
 @app.route('/style.css')
 def css():
     return send_file('style.css',mimetype='text/css')
@@ -14,8 +19,16 @@ def css():
 def reset():
     console_output=""
     return "Console cleared!"
-@app.route('/console_text')
+@app.route('/consoletext')
 def console_text():
-    return console_output
+    return cache["text"].replace("\n","<br>")
+
+@app.route('/input')
+def getinput():
+
+    cache["text"]+=request.args.get('text')
+
+    return cache["text"]
+
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0',port=8000)
+    app.run(debug=True, host='0.0.0.0',port=8004)
