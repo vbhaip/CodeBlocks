@@ -1,3 +1,6 @@
 body{
-  background-color:lightblue;
+  background-color:darkgray;
+}
+.form-control{
+  padding-top:5px
 }

@@ -1,13 +1,14 @@
-# from elasticsearch import Elasticsearch
+from elasticsearch import Elasticsearch
 import platform
 from subprocess import call
 import datetime
+import urllib
 # from elasticsearch import Elasticsearch
 p=platform.system()
 L="Linux"
 W="Windows"
 M="Darwin"
-# es = Elasticsearch()
+es = Elasticsearch()
 def open_google():
     if p==L:
         call(["google-chrome"])
@@ -35,14 +36,17 @@ def computer_mute(bool):
 
 def print_time():
 	print(datetime.datetime.now())
-# def get_tweets(hashtag):
-#     result = es.search(index="hacktjfinal", body={"query": {"match": {"message" : hashtag}}})
-#     for tweet in result['hits']['hits']:
-#         print(tweet['_source']['user'])
-#         print(tweet['_source']['message'])
-#         print()
-# if __name__=="__main__":
-#     get_tweets("stock market")
+def get_tweets(hashtag):
+    result = es.search(index="hacktjfinal", body={"query": {"match": {"message": hashtag}}})
+    text = ""
+    for tweet in result['hits']['hits']:
+        print(tweet['_source']['user'])
+        print(tweet['_source']['message'])
+        print()
+        text += "@" + tweet['_source']['user'] + "\n" + tweet['_source']['message'] + "\n\n"
+    call(["curl", "-X", "GET", 'localhost:8004/input?text=' + urllib.parse.quote_plus(text)])
+if __name__=="__main__":
+    get_tweets("stock market")
 #curl -X PUT localhost:9200/test3/_settings -d {\"index\" : {\"mapping\" : {\"total_fields\" : {\"limit\" : \"5000\"}}}}
     #print(platform.system())
     #"Linux","Windows","Darwin"
