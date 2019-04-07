@@ -8,11 +8,11 @@ COLORS = ["PINK", "GREEN", "YELLOW", "RED"]
 
 #this defines the threshold for the hsv_mask
 
-low_pink_hsv = np.array([142, 50, 207])
+low_pink_hsv = np.array([142, 50, 157])
 high_pink_hsv = np.array([247, 255, 255])
 
-low_green_hsv = np.array([48, 33, 116])
-high_green_hsv = np.array([108, 171, 255])
+low_green_hsv = np.array([52, 97, 80])
+high_green_hsv = np.array([98, 255, 255])
 
 low_yellow_hsv = np.array([30, 50, 50])
 high_yellow_hsv = np.array([45, 255, 255])
@@ -32,8 +32,9 @@ def getContours(raw_frame, color):
 		mask_hsv = cv2.inRange(hsv, low_pink_hsv, high_pink_hsv)
 	elif(color == "GREEN"):
 		mask_hsv = cv2.inRange(hsv, low_green_hsv, high_green_hsv)
-		cv2.imshow('hsv', mask_hsv)
-		cv2.waitKey(30)
+		# tmp = cv2.resize(mask_hsv, (960, 540))
+		# cv2.imshow('hsv', tmp)
+		# cv2.waitKey(30)
 	elif(color == "YELLOW"):
 		mask_hsv = cv2.inRange(hsv, low_yellow_hsv, high_yellow_hsv)
 	elif(color == "ORANGE"):
