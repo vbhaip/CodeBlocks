@@ -8,7 +8,7 @@ class ConditionStructure:
 		self.else_block = else_block
 
 	def isTrue(self):
-		return True
+		return self.cond
 
 	def evaluate(self):
 		if (self.isTrue()):
