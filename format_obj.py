@@ -130,7 +130,7 @@ def blocks_to_struct(blocks):
 				ind += 2
 				rest = block_group[2:]
 				i_blocks, e_blocks = blocks_to_struct(rest)
-				all_if_blocks.append(ConditionStructure(cond, blocks_to_struct(rest), None))
+				all_if_blocks.append(ConditionStructure(cond, i_blocks, None))
 				'''
 				new_if_block, new_else_block = blocks_to_struct(block_group[2:])
 				new_else_block = None
