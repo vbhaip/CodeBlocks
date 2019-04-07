@@ -53,6 +53,8 @@ def get_tweets_global():
     get_tweets('Global Warming')
 def get_tweets_refugees():
     get_tweets('Refugees')
+def get_tweets_yext():
+    get_tweets('Yext')
 if __name__=="__main__":
     get_tweets("stock market")
 #curl -X PUT localhost:9200/test3/_settings -d {\"index\" : {\"mapping\" : {\"total_fields\" : {\"limit\" : \"5000\"}}}}
