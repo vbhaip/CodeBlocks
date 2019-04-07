@@ -2,19 +2,41 @@ from conditionblock import ConditionBlock
 
 class ConditionStructure:
 
-	def __init__(self, if_block, else_block, cond):
+	def __init__(self, cond, if_block, else_block):
+		self.cond = cond
 		self.if_block = if_block
 		self.else_block = else_block
-		self.cond = cond
 
 	def isTrue(self):
-		
+		return True
 
 	def evaluate(self):
-		if(self.isTrue(self.cond)):
-			self.if_block.evaluate()
-		else:
-			self.else_block.evaluate()
+		if (self.isTrue(self)):
+			for block in self.if_block:
+				block.evaluate()
+		elif self.else_block:
+			# else block if it exists
+			for block in self.else_block:
+				block.evaluate()
+
+	def display(self, indents):
+		print('%sif: %s' % ('  ' * indents, self.cond))
+		for struct in self.if_block:
+			if type(struct) == type(self):
+				struct.display(indents + 1)
+			else:
+				print('%s%s' % ('  ' * (indents + 1), str(struct)))
+		if self.else_block:
+			print('%selse:' % '  ' * indents)
+			for struct in self.else_block:
+				if type(struct) == type(self):
+					struct.display(indents + 1)
+				else:
+					print('%s%s' % ('  ' * (indents + 1), str(struct)))
+
+	def __str__(self):
+		self.display(0)
+		return ''
 
 
 
