@@ -5,7 +5,7 @@ class ConditionBlock:
 		self.action = action
 
 	def runAction(self):
-		print("action")
+		exec(self.action)
 
 
 

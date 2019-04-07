@@ -1,3 +1,4 @@
+from elasticsearch import Elasticsearch
 import platform
 from subprocess import call
 from elasticsearch import Elasticsearch
