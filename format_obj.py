@@ -6,7 +6,8 @@ SEARCH_CONE_SLOPE = .15
 INDENT_DIST = 10
 
 #inp = [(50, 50, 'ORANGE', 4), (100, 50, 'YELLOW', 4), (80, 100, 'ORANGE', 4), (130, 100, 'YELLOW', 4), (110, 150, 'GREEN', 4), (110, 200, 'GREEN', 5), (80, 250, 'GREEN', 6), (50, 300, 'GREEN', 4)]
-inp = [(50, 20, 'GREEN', 5), (50, 50, 'ORANGE', 4), (100, 50, 'YELLOW', 4), (80, 100, 'GREEN', 4), (80, 150, 'GREEN', 5), (50, 200, 'ORANGE', 5), (80, 250, 'GREEN', 6), (50, 300, 'GREEN', 4)]
+#inp = [(50, 20, 'GREEN', 5), (50, 50, 'ORANGE', 4), (100, 50, 'YELLOW', 4), (80, 100, 'GREEN', 4), (80, 150, 'GREEN', 5), (50, 200, 'ORANGE', 5), (80, 250, 'GREEN', 6), (50, 300, 'GREEN', 4)]
+inp = [(50, 50, 'ORANGE', 4), (100, 50, 'YELLOW', 4), (80, 100, 'ORANGE', 4), (130, 100, 'YELLOW', 4), (110, 150, 'GREEN', 4)]
 
 def add_block_group(rem, last_added, last_elif, last_elif_xy):
 	cur_block = []
