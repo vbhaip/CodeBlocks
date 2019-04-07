@@ -1,6 +1,6 @@
 import numpy as np
 import cv2
-
+import format_obj
 
 AREA_THRESHOLD = 15000
 COLORS = ["PINK", "GREEN", "YELLOW", "ORANGE"]
@@ -93,7 +93,12 @@ while(True):
 	
 	arr = getBoxArray(frame)
 
-	print(arr)
+	# print(arr)
+
+	obj = format_obj.format_objects(arr)
+	print(obj)
+	print("\n")
+
 
 	# cv2.imshow('mask',mask_hsv)
 	cv2.imshow('frame', frame)
