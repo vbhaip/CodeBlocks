@@ -93,11 +93,13 @@ while(True):
 	
 	arr = getBoxArray(frame)
 
-	print(arr)
-	print("\n\n")
+	# print(arr)
+	# print("\n\n")
 	obj = format_obj.format_objects(arr)
-	print(obj)
-	print("\n")
+	# print(obj)
+	# print("\n")
+
+	obj.evaluate()
 
 
 	# cv2.imshow('mask',mask_hsv)

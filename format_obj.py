@@ -6,7 +6,12 @@ SEARCH_CONE_SLOPE = .15
 INDENT_DIST = 10
 
 #inp = [(50, 50, 'ORANGE', 4), (100, 50, 'YELLOW', 4), (80, 100, 'ORANGE', 4), (130, 100, 'YELLOW', 4), (110, 150, 'GREEN', 4), (110, 200, 'GREEN', 5), (80, 250, 'GREEN', 6), (50, 300, 'GREEN', 4)]
+<<<<<<< HEAD
 inp = [(50, 50, 'ORANGE', 4), (100, 50, 'YELLOW', 4), (80, 100, 'GREEN', 4), (80, 150, 'GREEN', 5)]
+=======
+#inp = [(50, 20, 'GREEN', 5), (50, 50, 'ORANGE', 4), (100, 50, 'YELLOW', 4), (80, 100, 'GREEN', 4), (80, 150, 'GREEN', 5), (50, 200, 'ORANGE', 5), (80, 250, 'GREEN', 6), (50, 300, 'GREEN', 4)]
+inp = [(50, 50, 'ORANGE', 4), (100, 50, 'YELLOW', 4), (80, 100, 'ORANGE', 4), (130, 100, 'YELLOW', 4), (110, 150, 'GREEN', 4)]
+>>>>>>> d90488290e173019ff2003f12a7d99f54b0e1d39
 
 def add_block_group(rem, last_added, last_elif, last_elif_xy):
 	cur_block = []
@@ -47,13 +52,13 @@ def add_block_group(rem, last_added, last_elif, last_elif_xy):
 					print('Could not find a condition for an if!')
 				last_added = rem.pop(closest_in_cone_ind)
 				block = [n_last_elif, last_added]
-				block += add_block_group(rem, last_added, n_last_elif, n_last_elif_xy)
+				block += [add_block_group(rem, last_added, n_last_elif, n_last_elif_xy)]
 				cur_block.append(block)
 			# if its an else
 			else:
 				n_last_elif, n_last_elif_xy, last_added = next_block, (next_block[0], next_block[1]), next_block
 				block = [n_last_elif]
-				block += add_block_group(rem, last_added, n_last_elif, n_last_elif_xy)
+				block += [add_block_group(rem, last_added, n_last_elif, n_last_elif_xy)]
 				cur_block.append(block)
 
 
@@ -62,9 +67,9 @@ def add_block_group(rem, last_added, last_elif, last_elif_xy):
 			cur_block.append(next_block)
 	return cur_block
 
-# blocks = add_block_group(inp, None, None, (-INDENT_DIST, 0))
-# print('out', blocks)
-# print('\n\n\n')
+blocks = add_block_group(inp, None, None, (-INDENT_DIST, 0))
+print('out', blocks)
+print('\n\n\n')
 '''
 def blocks_to_struct(blocks):
 	ind = 0
@@ -125,10 +130,19 @@ def blocks_to_struct(blocks):
 			# if
 			if block_group[0][2] == 'ORANGE' and block_group[0][3] == 4:
 				cond = color_num_to_block[(block_group[1][2], block_group[1][3])]
-				ind += 2
-				rest = block_group[2:]
+				ind += 1
+				rest = block_group[2]
 				i_blocks, e_blocks = blocks_to_struct(rest)
-				all_if_blocks.append(ConditionStructure(cond, i_blocks, None))
+
+				# else
+				if ind < len(blocks):
+					block_group = blocks[ind]
+					if block_group[0][2] == 'ORANGE' and block_group[0][3] == 5:
+						ind += 1
+						rest = block_group[1]
+						e_blocks, _ = blocks_to_struct(rest)
+				all_if_blocks.append(ConditionStructure(cond, i_blocks, e_blocks))
+
 				'''
 				new_if_block, new_else_block = blocks_to_struct(block_group[2:])
 				new_else_block = None

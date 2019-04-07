@@ -4,7 +4,7 @@ class ConditionBlock:
 		self.action = action
 
 	def evaluate(self):
-		exec(self.action)
+		self.action()
 
 	def __str__(self):
 		return self.action

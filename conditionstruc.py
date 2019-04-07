@@ -11,7 +11,7 @@ class ConditionStructure:
 		return True
 
 	def evaluate(self):
-		if (self.isTrue(self)):
+		if (self.isTrue()):
 			for block in self.if_block:
 				block.evaluate()
 		elif self.else_block:
