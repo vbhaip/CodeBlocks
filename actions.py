@@ -6,6 +6,7 @@ p=platform.system()
 L="Linux"
 W="Windows"
 M="Darwin"
+es = Elasticsearch()
 def open_google():
     if p==L:
         call(["google-chrome"])
@@ -31,9 +32,13 @@ def computer_mute(bool):
     elif p==M:
         call(["osascript","-e","\"set volume output muted "+bool.upper()])
 def get_tweets(hashtag):
-    
+    result = es.search(index="test4", body={"query": {"match": {"message" : hashtag}}})
+    for tweet in result['hits']['hits']:
+        print(tweet['_source']['user'])
+        print(tweet['_source']['message'])
+        print()
 if __name__=="__main__":
-
-
+    get_tweets("stock market")
+#curl -X PUT localhost:9200/test3/_settings -d {\"index\" : {\"mapping\" : {\"total_fields\" : {\"limit\" : \"5000\"}}}}
     #print(platform.system())
     #"Linux","Windows","Darwin"
