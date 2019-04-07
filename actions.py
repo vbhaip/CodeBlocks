@@ -14,6 +14,8 @@ def open_google():
         call(["google-chrome"])
     elif p==M:
         call(["open","[location of google]"])
+    elif p==W:
+        call(["start","Path to spotify"])
 def open_word():
     if p==M:
         call(["open","[location of Word]"])
