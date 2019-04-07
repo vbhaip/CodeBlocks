@@ -30,5 +30,7 @@ def computer_mute(bool):
     elif p==M:
         call(["osascript","-e","\"set volume output muted "+bool.upper()])
 if __name__=="__main__":
-    print(platform.system())
+
+
+    #print(platform.system())
     #"Linux","Windows","Darwin"
