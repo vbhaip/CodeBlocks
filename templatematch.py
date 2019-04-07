@@ -33,7 +33,7 @@ def getContours(raw_frame, color):
 	elif(color == "ORANGE"):
 		mask_hsv = cv2.inRange(hsv, low_orange_hsv, high_orange_hsv)
 
-	_, contours, _ = cv2.findContours(mask_hsv,cv2.RETR_TREE,cv2.CHAIN_APPROX_NONE)
+	contours, _ = cv2.findContours(mask_hsv,cv2.RETR_TREE,cv2.CHAIN_APPROX_NONE)
 
 	return contours
 
@@ -99,6 +99,6 @@ while(True):
 	cv2.imshow('frame', frame)
 
 
-	if cv2.waitKey(5000) & 0xFF == ord('q'):
+	if cv2.waitKey(500) & 0xFF == ord('q'):
 		break
 
