@@ -49,6 +49,10 @@ def get_tweets(hashtag):
         print()
         text += "@" + tweet['_source']['user'] + "\n" + tweet['_source']['message'] + "\n\n"
     call(["curl", "-X", "GET", 'localhost:8004/input?text=' + urllib.parse.quote_plus(text)])
+def get_tweets_global():
+    get_tweets('Global Warming')
+def get_tweets_refugees():
+    get_tweets('Refugees')
 if __name__=="__main__":
     get_tweets("stock market")
 #curl -X PUT localhost:9200/test3/_settings -d {\"index\" : {\"mapping\" : {\"total_fields\" : {\"limit\" : \"5000\"}}}}

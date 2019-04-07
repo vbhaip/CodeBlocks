@@ -1,14 +1,18 @@
 from conditionblock import ConditionBlock
 import actions
+import datetime
 
 dic = {}
 dic[('PINK', 4)] = ConditionBlock('if', '')
 dic[('PINK', 5)] = ConditionBlock('else', '')
 dic[('PINK', 6)] = ConditionBlock('for', '')
 
-dic[('YELLOW', 4)] = True
-dic[('YELLOW', 5)] = False
+dic[('YELLOW', 4)] = datetime.datetime.now().minute % 2 == 0
+dic[('YELLOW', 5)] = 8 < 9
+dic[('YELLOW', 5)] = 8 > 9
 
-dic[('GREEN', 4)] = ConditionBlock('action', actions.print_time)
-dic[('GREEN', 5)] = ConditionBlock('action', actions.open_spotify)
-dic[('GREEN', 6)] = ConditionBlock('action', 'print("i am 6")')
+dic[('GREEN', 4)]  = ConditionBlock('action', actions.open_google)
+dic[('GREEN', 5)]  = ConditionBlock('action', actions.open_spotify)
+dic[('GREEN', 6)]  = ConditionBlock('action', actions.print_time)
+dic[('GREEN', 10)] = ConditionBlock('action', actions.get_tweets_global)
+dic[('GREEN', 11)] = ConditionBlock('action', actions.get_tweets_refugees)
