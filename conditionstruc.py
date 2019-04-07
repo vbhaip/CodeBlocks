@@ -7,7 +7,7 @@ class ConditionStructure:
 		self.else_block = else_block
 
 	def isTrue(self):
-		return self.cond
+		return self.cond()
 
 	def evaluate(self):
 		if (self.isTrue()):
@@ -44,7 +44,7 @@ class ConditionStructureLoop:
 
 	def evaluate(self):
 		for i in range(self.loops):
-			for block in self.if_block:
+			for block in self.loop_block:
 				block.evaluate()
 
 	def display(self, indents):

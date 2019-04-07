@@ -4,6 +4,8 @@ from subprocess import call
 import datetime
 import urllib
 from elasticsearch import Elasticsearch
+import time
+
 p=platform.system()
 L="Linux"
 W="Windows"
@@ -13,7 +15,7 @@ def open_google():
     if p==L:
         call(["google-chrome"])
     elif p==M:
-        call(["open","[location of google]"])
+        call(["open","/Applications/Google Chrome.app"])
     elif p==W:
         call(["start","Path to spotify"])
 def open_word():
@@ -22,6 +24,9 @@ def open_word():
 def open_spotify():
     if p==M:
         call(["open","/Applications/Spotify.app"])
+        time.sleep(5)
+        call(["osascript","-e",'tell application "Spotify" to play'])
+
     elif p==W:
         call(["start","Path to spotify"])
 def computer_volume(vol):
@@ -44,9 +49,9 @@ def get_tweets(hashtag):
     result = es.search(index="hacktjfinal", body={"query": {"match": {"message": hashtag}}})
     text = ""
     for tweet in result['hits']['hits']:
-        print(tweet['_source']['user'])
-        print(tweet['_source']['message'])
-        print()
+        # print(tweet['_source']['user'])
+        # print(tweet['_source']['message'])
+        # print()
         text += "@" + tweet['_source']['user'] + "\n" + tweet['_source']['message'] + "\n\n"
     call(["curl", "-X", "GET", 'localhost:8004/input?text=' + urllib.parse.quote_plus(text)])
 def get_tweets_global():
