@@ -20,6 +20,8 @@ def open_word():
 def open_spotify():
     if p==M:
         call(["open","/Applications/Spotify.app"])
+    elif p==W:
+        call(["start","Path to spotify"])
 def computer_volume(vol):
     if p==L:
         call(["amixer", "-D", "pulse", "sset", "Master", str(vol)+"%"])
