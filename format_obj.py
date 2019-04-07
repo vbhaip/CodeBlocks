@@ -109,17 +109,17 @@ def blocks_to_struct(blocks):
 	return all_if_blocks
 
 
-try:
-	blocks = add_block_group(inp, None, None, (-INDENT_DIST, 0))
-	print('out', blocks)
-	print('\n\n\n')
-	i_blocks = blocks_to_struct(blocks)
-	overall_struct = ConditionStructure(True, i_blocks, [])
-	print()
-	print(overall_struct)
-except:
-	print('Error in parsing input! Please check your blocks')
-	#return ConditionStructure(conditions.ret_true, [], [])
+# try:
+# 	blocks = add_block_group(inp, None, None, (-INDENT_DIST, 0))
+# 	print('out', blocks)
+# 	print('\n\n\n')
+# 	i_blocks = blocks_to_struct(blocks)
+# 	overall_struct = ConditionStructure(True, i_blocks, [])
+# 	print()
+# 	print(overall_struct)
+# except:
+# 	print('Error in parsing input! Please check your blocks')
+# 	#return ConditionStructure(conditions.ret_true, [], [])
 
 def format_objects(inp):
 	try:
