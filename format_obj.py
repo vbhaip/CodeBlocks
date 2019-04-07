@@ -6,7 +6,7 @@ SEARCH_CONE_SLOPE = .15
 INDENT_DIST = 10
 
 #inp = [(50, 50, 'ORANGE', 4), (100, 50, 'YELLOW', 4), (80, 100, 'ORANGE', 4), (130, 100, 'YELLOW', 4), (110, 150, 'GREEN', 4), (110, 200, 'GREEN', 5), (80, 250, 'GREEN', 6), (50, 300, 'GREEN', 4)]
-#inp = [(50, 50, 'ORANGE', 4), (100, 50, 'YELLOW', 4), (80, 100, 'GREEN', 4), (80, 150, 'GREEN', 5)]
+inp = [(50, 50, 'ORANGE', 4), (100, 50, 'YELLOW', 4), (80, 100, 'GREEN', 4), (80, 150, 'GREEN', 5)]
 
 def add_block_group(rem, last_added, last_elif, last_elif_xy):
 	cur_block = []
@@ -37,7 +37,7 @@ def add_block_group(rem, last_added, last_elif, last_elif_xy):
 				print('if')
 				n_last_elif, n_last_elif_xy = next_block, (next_block[0], next_block[1])
 				closest_in_cone_ind, closest_in_cone_x = -1, 999999999
-				for i, (x, y, c, np) in enumerate(inp):
+				for i, (x, y, c, np) in enumerate(rem):
 					dx = x - n_last_elif_xy[0]
 					# if its in the cone
 					if -SEARCH_CONE_SLOPE * dx + n_last_elif_xy[1] < y < SEARCH_CONE_SLOPE * dx + n_last_elif_xy[1]:
@@ -156,10 +156,10 @@ def blocks_to_struct(blocks):
 	print(all_if_blocks, all_else_blocks)
 	return all_if_blocks, all_else_blocks
 
-i_blocks, e_blocks = blocks_to_struct(blocks)
-overall_struct = ConditionStructure(True, i_blocks, e_blocks)
-print()
-print(overall_struct)
+# i_blocks, e_blocks = blocks_to_struct(blocks)
+# overall_struct = ConditionStructure(True, i_blocks, e_blocks)
+# print()
+# print(overall_struct)
 
 def format_objects(inp):
 	blocks = add_block_group(inp, None, None, (-INDENT_DIST, 0))

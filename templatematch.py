@@ -3,7 +3,7 @@ import cv2
 import format_obj
 
 AREA_THRESHOLD = 15000
-COLORS = ["PINK", "GREEN", "YELLOW", "ORANGE"]
+COLORS = ["PINK", "GREEN"]
 
 #this defines the threshold for the hsv_mask
 
@@ -93,8 +93,8 @@ while(True):
 	
 	arr = getBoxArray(frame)
 
-	# print(arr)
-
+	print(arr)
+	print("\n\n")
 	obj = format_obj.format_objects(arr)
 	print(obj)
 	print("\n")
