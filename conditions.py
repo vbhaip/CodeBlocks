@@ -30,3 +30,8 @@ def check_face():
 	cv2.imshow("Faces", image)
 	cv2.waitKey(1000)
 	return len(faces) > 0
+
+def check_pass():
+    val = input('Enter password:\n')
+    print(val == 'password')
+    return(val == 'password')

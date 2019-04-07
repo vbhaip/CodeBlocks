@@ -19,6 +19,7 @@ class ConditionStructure:
 				block.evaluate()
 
 	def display(self, indents):
+		indents += 1
 		print('%sif: %s' % ('  ' * indents, self.cond))
 		for struct in self.if_block:
 			if type(struct) == type(self):
@@ -26,7 +27,7 @@ class ConditionStructure:
 			else:
 				print('%s%s' % ('  ' * (indents + 1), str(struct)))
 		if self.else_block:
-			print('%selse:' % '  ' * indents)
+			print('%selse:' % '  ' * (indents))
 			for struct in self.else_block:
 				if type(struct) == type(self):
 					struct.display(indents + 1)

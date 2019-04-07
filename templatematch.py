@@ -8,11 +8,11 @@ COLORS = ["PINK", "GREEN", "YELLOW", "RED"]
 
 #this defines the threshold for the hsv_mask
 
-low_pink_hsv = np.array([142, 50, 167])
+low_pink_hsv = np.array([142, 50, 207])
 high_pink_hsv = np.array([247, 255, 255])
 
-low_green_hsv = np.array([60, 43, 126])
-high_green_hsv = np.array([108, 141, 255])
+low_green_hsv = np.array([48, 33, 116])
+high_green_hsv = np.array([108, 171, 255])
 
 low_yellow_hsv = np.array([30, 50, 50])
 high_yellow_hsv = np.array([45, 255, 255])
@@ -20,7 +20,7 @@ high_yellow_hsv = np.array([45, 255, 255])
 low_orange_hsv = np.array([0, 209, 60])
 high_orange_hsv = np.array([132, 255, 255])
 
-low_red_hsv = np.array([0, 180, 0])
+low_red_hsv = np.array([0, 180, 16])
 high_red_hsv = np.array([20, 255, 255])
 
 
@@ -32,10 +32,10 @@ def getContours(raw_frame, color):
 		mask_hsv = cv2.inRange(hsv, low_pink_hsv, high_pink_hsv)
 	elif(color == "GREEN"):
 		mask_hsv = cv2.inRange(hsv, low_green_hsv, high_green_hsv)
-	elif(color == "YELLOW"):
-		mask_hsv = cv2.inRange(hsv, low_yellow_hsv, high_yellow_hsv)
 		cv2.imshow('hsv', mask_hsv)
 		cv2.waitKey(30)
+	elif(color == "YELLOW"):
+		mask_hsv = cv2.inRange(hsv, low_yellow_hsv, high_yellow_hsv)
 	elif(color == "ORANGE"):
 		mask_hsv = cv2.inRange(hsv, low_orange_hsv, high_orange_hsv)
 	elif(color == "RED"):
@@ -81,10 +81,11 @@ def getFeatures(frame, c, color):
 
 
 def getBoxArray(frame):
+	blur = cv2.GaussianBlur(frame, (11, 11), 0, 0)
 
 	box_arr = []
 	for color in COLORS:
-		contours = getContours(frame, color)
+		contours = getContours(blur, color)
 		for c in contours:
 			if cv2.contourArea(c) > AREA_THRESHOLD:
 				box_arr.append(getFeatures(frame, c, color))
