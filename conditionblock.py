@@ -1,8 +1,4 @@
 class ConditionBlock:
-    def __init__(self, cond_type, action):
-        self.cond_type = cond_type
-        self.action = action
-
 	def __init__(self, cond_type, action):
 		self.cond_type = cond_type
 		self.action = action
@@ -10,4 +6,5 @@ class ConditionBlock:
 	def evaluate(self):
 		exec(self.action)
 
-
+	def __str__(self):
+		return self.action
