@@ -17,7 +17,7 @@ Getting into computer science at a young age can be intimidating, and students g
 
 The first step was to detect the blocks under the webcam. We detected the contours of the physical blocks, and found attributes (color, number of vertices) of them. The color of the block told what the type of the block was.
 
-|ColOAor  |Type of Block|
+|Color  |Type of Block|
 |---    |----   |
 |Pink   |Structural (If, Else, For)|
 |Yellow |Parameters (Conditions for If, Iterator for For)|
