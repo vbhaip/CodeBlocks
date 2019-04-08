@@ -1,6 +1,9 @@
+![](https://github.com/vbhaip/hacktj2019/blob/master/CodeBlocks%20Logo.png?raw=true)
+
+
 # CodeBlocks
 
-This repository contains our 2019 HackTJ project.
+This repository contains our 2019 HackTJ project. You can check out the Devpost submission [here](https://devpost.com/software/codeblocks).
 
 ### What it does
 
@@ -14,7 +17,7 @@ Getting into computer science at a young age can be intimidating, and students g
 
 The first step was to detect the blocks under the webcam. We detected the contours of the physical blocks, and found attributes (color, number of vertices) of them. The color of the block told what the type of the block was.
 
-|Color  |Type of Block|
+|ColOAor  |Type of Block|
 |---    |----   |
 |Pink   |Structural (If, Else, For)|
 |Yellow |Parameters (Conditions for If, Iterator for For)|
@@ -27,4 +30,9 @@ The Computer Vision aspect of the program detects the different blocks and creat
 The array of tuples is then parsed into Objects we made to encapsulate the functionality of the code. We designed this so that programs are generalizeable - you can nest loop statements and move around blocks as if it was real code.
 
 The last part of the program was evaluating whether conditions were true or not and running actions. The Object classes which contained the structure of the parsed code had methods set for the actions and evaluting conditions, so we created methods to just evaluate the objects after the run button was pressed.
-# hacktj2019
+
+### Demo
+
+[![Video Demonstration](http://img.youtube.com/vi/JLW0_6bc3CM/0.jpg)](http://www.youtube.com/watch?v=JLW0_6bc3CM)
+
+
